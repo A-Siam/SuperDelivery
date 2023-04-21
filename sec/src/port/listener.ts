@@ -8,7 +8,7 @@ type OnMessageHandler = (message: TransactionLog) => void
 
 async function initConsumer(onMessage: OnMessageHandler) {
     await consumer.run({
-        eachMessage: async ({topic, partition, message}) => {
+        eachMessage: async ({message}) => {
             onMessage(JSON.parse(message.value?.toString()!))
         }
     })
