@@ -21,8 +21,8 @@ services:
 
   db:
     environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
     image: postgres
     ports:
       - "5432:5432"
