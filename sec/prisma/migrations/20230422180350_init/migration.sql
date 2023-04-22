@@ -10,3 +10,6 @@ CREATE TABLE "TransactionLog" (
 
     CONSTRAINT "TransactionLog_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE INDEX "TransactionLog_transactionId_idx" ON "TransactionLog"("transactionId");
