@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "prisma:collect": "bash ./prisma-collect.sh",
-    "prisma:generate": "yarn prisma:collect && ts-node ./node_modules/.bin/prisma generate"
+    "prisma:generate": "yarn prisma:collect && yarn prisma generate",
+    "prisma:migrate": "yarn prisma:collect && prisma migrate dev --name "
   },
   "keywords": [
     "SEC",
