@@ -2,12 +2,14 @@
   "name": "sec",
   "version": "1.0.0",
   "description": "The SEC for super delivery",
-  "main": "index.ts",
+  "main": "src/main.ts",
   "scripts": {
     "test": "jest",
     "prisma:collect": "bash ./prisma-collect.sh",
     "prisma:generate": "yarn prisma:collect && yarn prisma generate",
-    "prisma:migrate": "yarn prisma:collect && prisma migrate dev --name "
+    "prisma:migrate": "yarn prisma:collect && prisma migrate dev --name ",
+    "watch": "nodemon -r dotenv/config src/main.ts",
+    "debug": "ts-node -r dotenv/config src/main.ts"
   },
   "keywords": [
     "SEC",

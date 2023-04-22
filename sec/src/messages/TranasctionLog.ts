@@ -1,6 +1,6 @@
 export default interface TransactionLog {
     eventName: string
-    rollbackEventName: string
+    previousEventName: string
     order: number
     tranasctionId: string
 }

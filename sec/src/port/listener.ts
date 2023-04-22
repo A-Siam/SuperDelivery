@@ -1,10 +1,10 @@
 import { GROUP_ID } from '../constants'
-import TransactionLog from '../data/TranasctionLog'
+import TransactionLog from '../messages/TranasctionLog'
 import { getKafkaClient } from './kafka-connection'
 
 const consumer = getKafkaClient().consumer({ groupId: GROUP_ID! })
 
-type OnMessageHandler = (message: TransactionLog) => void
+type OnMessageHandler = (message: TransactionLog) => Promise<void>
 
 async function initConsumer(onMessage: OnMessageHandler) {
     await consumer.run({
@@ -16,7 +16,7 @@ async function initConsumer(onMessage: OnMessageHandler) {
 
 export async function initiateListener(
     topic: string,
-    onMessageRecived: (message: TransactionLog) => void
+    onMessageRecived: OnMessageHandler
 ) {
     await consumer.connect()
     await consumer.subscribe({ topic, fromBeginning: true })
