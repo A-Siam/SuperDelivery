@@ -1,13 +1,6 @@
 version: '3.9'
 
 services:
-  zookeeper:
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    image: confluentinc/cp-zookeeper:7.3.2
-
   broker:
     container_name: broker
     depends_on:
@@ -26,3 +19,25 @@ services:
     # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
       - "9092:9092"
 
+  db:
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  zookeeper:
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    image: confluentinc/cp-zookeeper:7.3.2
+
+volumes:
+  db_data:
