@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 
-export async function initializeEnv(){
-    dotenv.config()    
+export async function initializeEnv() {
+    dotenv.config()
 }
