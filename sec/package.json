@@ -4,7 +4,9 @@
   "description": "The SEC for super delivery",
   "main": "index.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prisma:collect": "bash ./prisma-collect.sh",
+    "prisma:generate": "yarn prisma:collect && ts-node ./node_modules/.bin/prisma generate"
   },
   "keywords": [
     "SEC",
@@ -22,6 +24,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@prisma/client": "4.13.0",
     "dotenv": "^16.0.3",
     "pg": "^8.10.0",
     "prisma": "^4.13.0"

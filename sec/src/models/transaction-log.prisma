@@ -7,10 +7,3 @@ model TransactionLog {
     previousEventName String
     order             Int      @default(1)
 }
-datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-}
-generator client {
-    provider = "prisma-client-js"
-}
