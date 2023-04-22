@@ -6,6 +6,8 @@ model TransactionLog {
     currentEventName  String
     previousEventName String
     order             Int      @default(1)
+
+    @@index([transactionId])
 }
 datasource db {
     provider = "postgresql"
