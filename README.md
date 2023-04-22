@@ -19,4 +19,11 @@ super delivery provide creating order -> update inventory -> process payment -> 
 - Kafka
 
 ## Building
-
+### SEC
+#### Env
+```env
+KAFKA_BROKER=
+EVENTS_TOPIC_NAME=
+CLIENT_ID=
+GROUP_ID=
+```
