@@ -1,9 +1,17 @@
 import { PrismaClient } from '@prisma/client'
 import { initiateListener } from './port/listener'
-import { storeTranasaction } from './services/transaction-storage'
+import TransactionStorageService from './services/transaction-storage'
+import TransactionCompensationService from './services/compensation'
 
 async function main() {
-    await initiateListener(process.env['EVENTS_TOPIC_NAME']!, storeTranasaction)
+    const transactionCompensationService = new TransactionCompensationService()
+    const transactionStorageService = new TransactionStorageService(
+        transactionCompensationService
+    )
+    await initiateListener(
+        process.env['EVENTS_TOPIC_NAME']!,
+        transactionStorageService.storeTranasaction
+    )
 }
 
 main()
