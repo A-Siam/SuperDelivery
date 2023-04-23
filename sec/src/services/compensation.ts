@@ -1,6 +1,7 @@
 import axios from 'axios'
 import services from '../../services_map.json'
 import { SAGA_ROLLBACK_API } from '../constants'
+import log from 'loglevel'
 
 export default class TransactionCompensationService {
     async compoensate(
@@ -14,6 +15,10 @@ export default class TransactionCompensationService {
                 tranasaction_id: transactionId,
                 event_name: eventName,
             })
-        } catch (e) {}
+        } catch (e: any) {
+            log.error(
+                `Cannot rollback ${eventName} in transaction: ${transactionId} cause ${e.message}`
+            )
+        }
     }
 }
