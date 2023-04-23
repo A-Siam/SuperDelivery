@@ -3,4 +3,5 @@ export default interface TransactionLog {
     previousEventName: string
     order: number
     tranasctionId: string
+    serviceName: string
 }

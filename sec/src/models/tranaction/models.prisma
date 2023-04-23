@@ -1,11 +1,18 @@
 model TransactionLog {
-    id                String   @id @default(uuid())
-    createdAt         DateTime @default(now())
-    updatedAt         DateTime @default(now())
+    id                String     @id @default(uuid())
+    createdAt         DateTime   @default(now())
+    updatedAt         DateTime   @default(now())
     transactionId     String
     currentEventName  String
-    previousEventName String
-    order             Int      @default(1)
+    previousEventName String?
+    order             Int        @default(1)
+    actionType        ActionType
+    serviceName       String
 
     @@index([transactionId])
+}
+
+enum ActionType {
+    TRANSACTION
+    COMPENSATION
 }
