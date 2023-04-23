@@ -14,8 +14,6 @@ export default class TransactionCompensationService {
                 tranasaction_id: transactionId,
                 event_name: eventName,
             })
-        } catch (e) {
-
-        }
+        } catch (e) {}
     }
 }
