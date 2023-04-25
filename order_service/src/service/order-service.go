@@ -32,5 +32,7 @@ func CreateOrder(orderName, owner string, price float32) (models.Order, error) {
 		return models.Order{}, etx.Error
 	}
 
+    producer, err := saga
+
 	return order, nil
 }
