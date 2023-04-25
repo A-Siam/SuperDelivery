@@ -12,9 +12,11 @@ super delivery provide creating order -> update inventory -> process payment -> 
 ### Languages 
 - Java
 - NodeJs
+- GoLang
+
 ### Datastorage
 - PostgreSQL
-- ElasticSearch
+
 ### Event Streaming
 - Kafka
 
