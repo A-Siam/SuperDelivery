@@ -1,3 +1,4 @@
 sec/node_modules
 sec/.env
 node_modules
+order_service/.env
