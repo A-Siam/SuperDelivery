@@ -7,14 +7,23 @@ import (
 	"gorm.io/gorm"
 )
 
+var orderConnection *gorm.DB
+var evnetsConnection *gorm.DB
+
 /** init db connection */
 func InitOrdersDBConnection() (db *gorm.DB, err error) {
+    if orderConnection != nil {
+        return orderConnection, nil
+    }
 	conStr, err := getOrdersConnectionString()
 	db, err = initDBConnection(conStr)
 	return
 }
 
 func InitEventsDBConnection() (db *gorm.DB, err error) {
+    if evnetsConnection != nil {
+        return evnetsConnection, nil
+    }
 	conStr, err := getEventsDBConnectionString()
 	db, err = initDBConnection(conStr)
 	return
