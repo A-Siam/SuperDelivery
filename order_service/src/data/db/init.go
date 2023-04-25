@@ -15,7 +15,7 @@ func InitOrdersDBConnection() (db *gorm.DB, err error) {
 }
 
 func InitEventsDBConnection() (db *gorm.DB, err error) {
-    conStr, err := getEventsDBConnectionString()
+	conStr, err := getEventsDBConnectionString()
 	db, err = initDBConnection(conStr)
 	return
 }
