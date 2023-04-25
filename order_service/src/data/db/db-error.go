@@ -3,14 +3,14 @@ package db
 import "errors"
 
 type DBConnectionError struct {
-	message   string
+	Message   string
 	FieldName string
 }
 
 func (connectionError DBConnectionError) Error() string {
-	return connectionError.message
+	return connectionError.Message
 }
 
 func (connectionError DBConnectionError) UnWrap() error {
-	return errors.New(connectionError.message)
+	return errors.New(connectionError.Message)
 }

@@ -41,7 +41,7 @@ func getEventsDBConnectionString() (string, error) {
 	eventsDBPassword := os.Getenv("EVENTS_DB_PASSWORD")
 	eventsDBName := os.Getenv("EVENTS_DB_DB_NAME")
 	if eventsDBHost == "" || eventsDBUsername == "" || eventsDBPassword == "" || eventsDBName == "" {
-		return "", &DBConnectionError{message: "one of the connection environment vairable is not set or doesn't have a proper value"}
+		return "", &DBConnectionError{Message: "one of the connection environment vairable is not set or doesn't have a proper value"}
 	}
 	return "", nil
 }
@@ -52,7 +52,7 @@ func getOrdersConnectionString() (string, error) {
 	ordersDBPassword := os.Getenv("ORDERS_DB_PASSWORD")
 	ordersDBName := os.Getenv("ORDERS_DB_DB_NAME")
 	if ordersDBHost == "" || ordersDBUsername == "" || ordersDBPassword == "" || ordersDBName == "" {
-		return "", &DBConnectionError{message: "one of the connection environment vairable is not set or doesn't have a proper value"}
+		return "", &DBConnectionError{Message: "one of the connection environment vairable is not set or doesn't have a proper value"}
 	}
 	return "", nil
 }
