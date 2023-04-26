@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Order struct {
 	gorm.Model
-	Name  string
-	Owner string
-	Price float32
+	Name  string `json:"name"`
+	Owner string `json:"owner"`
+	Price float32 `json:"price"`
 }

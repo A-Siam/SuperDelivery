@@ -10,12 +10,7 @@ import (
 	"github.com/Shopify/sarama"
 )
 
-func CreateOrder(orderName, owner string, price float32) (models.Order, error) {
-	order := models.Order{
-		Owner: owner,
-		Name:  orderName,
-		Price: price,
-	}
+func CreateOrder(order models.Order) (models.Order, error) {
 	event := models.Event{
 		EventName: "ORDER_CREATED",
 		Service:   "ORDER_SERVICE",
