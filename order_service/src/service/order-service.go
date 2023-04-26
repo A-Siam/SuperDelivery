@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/A-Siam/super_delivery/order_service/src/data/db"
 	"github.com/A-Siam/super_delivery/order_service/src/models"
@@ -12,10 +14,6 @@ import (
 )
 
 func CreateOrder(order models.Order) (models.Order, error) {
-	event := models.Event{
-		EventName: "ORDER_CREATED",
-		Service:   "ORDER_SERVICE",
-	}
 	ordersDB, err := db.InitOrdersDBConnection()
 	eventsDB, err := db.InitEventsDBConnection()
 	if err != nil {
@@ -23,6 +21,10 @@ func CreateOrder(order models.Order) (models.Order, error) {
 	}
 
 	otx := ordersDB.Create(&order)
+	event := models.Event{
+		EventName: fmt.Sprintf("ORDER_CREATED_%d", order.ID),
+		Service:   "ORDER_SERVICE",
+	}
 	etx := eventsDB.Create(&event)
 	if otx.Error != nil {
 		return models.Order{}, otx.Error
@@ -50,6 +52,22 @@ func GetAllOrders() ([]*models.Order, error) {
 	}
 	//  no need to call saga as there is no transaction
 	return orders, nil
+}
+
+func RollbackOrderCreation(eventName string) error {
+	tokens := strings.Split(eventName, "_")
+	orderId, err := strconv.ParseUint(tokens[len(tokens)-1], 10, 64)
+	ordersDB, err := db.InitOrdersDBConnection()
+	eventsDB, err := db.InitEventsDBConnection()
+	if err != nil {
+		return err
+	}
+	ordersDB.Delete(&models.Order{}, uint(orderId))
+	eventsDB.Create(models.Event{
+		EventName: fmt.Sprintf("DELETE_ORDER_%d", orderId),
+		Service:   "ORDER_SERVICE",
+	})
+	return nil
 }
 
 func produceOrderCreatedEvent(event models.Event) error {
