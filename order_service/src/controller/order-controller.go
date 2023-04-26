@@ -27,7 +27,17 @@ func ordersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getOrdersHandler(w http.ResponseWriter, r *http.Request) {
-	panic("unimplemented")
+	orders, err := service.GetAllOrders()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	ordersJson, err := json.Marshal(orders)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(ordersJson)
 }
 
 func createOrderHandler(j http.ResponseWriter, r *http.Request) {
@@ -55,10 +65,28 @@ func createOrderHandler(j http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(j, fmt.Sprintf("serialization error %s", err.Error()), http.StatusInternalServerError)
 	}
-	j.WriteHeader(http.StatusOK)
+	j.WriteHeader(http.StatusCreated)
 	j.Write(storedOrderJson)
 }
 
 func revertOrderHandler(w http.ResponseWriter, r *http.Request) {
-	panic("unimplemented")
+	bodyBytes, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+	var eventDetails *models.Event
+	err = json.Unmarshal(bodyBytes, eventDetails)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = service.RollbackOrderCreation(eventDetails.EventName)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+	w.Write([]byte{})
 }
