@@ -1,0 +1,19 @@
+server:
+  port: '3002'
+
+db:
+  events:
+    username: ${ENV.EVENTS_DB_USERNAME}
+    password: ${ENV.EVENTS_DB_PASSWORD}
+    host: ${ENV.EVENTS_DB_HOST}
+    port: ${ENV.EVENTS_DB_PORT}
+    name: ${ENV.EVENTS_DB_NAME}
+
+mq:
+  broker:
+    host: ${ENV_BROKER_HOST}
+    port: ${ENV_BROKER_PORT}
+  events:
+    topic: transactional-events-topic
+    client-id: payments_service
+    group-id: transactional-events-group
