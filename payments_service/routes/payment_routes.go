@@ -6,7 +6,6 @@ import (
 )
 
 func setupPaymentRoutes(app *fiber.App) {
-	app.Get("/payments", controllers.GetAllPayments)
 	app.Post("/payments", controllers.AddPayment)
 	app.Post("/payments/revert", controllers.RevertPayment)
 }
