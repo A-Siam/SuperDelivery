@@ -1,12 +1,14 @@
 # Super delivery application
 super delivery provide creating order -> update inventory -> process payment -> deliver order
 
-## this super delivery system uses
+## Patterns Used
 - Saga pattern
 - Event sourcing
 - CQRS
 
-**Note** This project *intentionally* doesn't use any external framworks to deaply learn about the topics mentioned however for production grade application I would use something linke **AxonIQ** framework to handle these patterns for me. Also auth is neglicted in this application for simplicty
+**Note** This project *intentionally* doesn't use any external frameworks to deeply learn about the topics mentioned however for production grade application I would use something like **AxonIQ** framework to handle these patterns for me. Also auth is neglected in this application for simplicity
+
+## Architecture
 
 ## System components
 ### Languages 
@@ -14,7 +16,7 @@ super delivery provide creating order -> update inventory -> process payment -> 
 - NodeJs
 - GoLang
 
-### Datastorage
+### Datastores
 - PostgreSQL
 
 ### Event Streaming
